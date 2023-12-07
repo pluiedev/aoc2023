@@ -1,0 +1,24 @@
+cabal-version:      3.0
+name:               aoc2023
+version:            0.1.0.0
+synopsis:           My Advent of Code 2023 solutions
+license:            MIT
+license-file:       LICENSE
+author:             Leah Amelia Chen
+maintainer:         hi@pluie.me
+build-type:         Simple
+
+common deps
+  default-language: GHC2021
+  build-depends: base ^>=4.17.2.1, containers, megaparsec, safe, hspec, split
+  ghc-options: -Wall
+
+library
+  import: deps
+  exposed-modules: Util.Aoc2023
+  hs-source-dirs: lib
+executable main
+  import: deps
+  build-depends: aoc2023
+  hs-source-dirs: src
+  main-is: Main.hs
