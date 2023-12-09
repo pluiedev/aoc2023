@@ -2,22 +2,18 @@ module Day4 where
 
 import Data.Function (on)
 import qualified Data.Set as Set
-import Test.Hspec
+import Test.Hspec (Spec, describe)
 import Text.Megaparsec
 import Text.Megaparsec.Char
 import Util.Aoc2023
 import Control.Monad (liftM2)
 
-test :: SpecWith ()
+test :: Spec
 test = describe "Day 4" $ do
-  it "passes the part 1 example" $
-    readFile "src/Day4/example" >>= parseShouldBe 13 solnA
-  it "passes the part 1 solution" $
-    readFile "src/Day4/input" >>= parseShouldBe 18519 solnA
-  it "passes the part 2 example" $
-    readFile "src/Day4/example" >>= parseShouldBe 30 solnB
-  it "passes the part 2 solution" $
-    readFile "src/Day4/input" >>= parseShouldBe 11787590 solnB
+  example 4 1 1 $ parseShouldBe 13 solnA
+  input 4 1 $ parseShouldBe 18519 solnA
+  example 4 2 1 $ parseShouldBe 30 solnB
+  input 4 2 $ parseShouldBe 11787590 solnB
 
 solnA :: Parser Int
 solnA = sum . map ((^) 2 . pred) . filter (/= 0) <$> many card

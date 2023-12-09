@@ -1,21 +1,17 @@
 module Day6 where
 
 import Data.Function (on)
-import Test.Hspec
+import Test.Hspec (Spec, describe)
 import Text.Megaparsec
 import Text.Megaparsec.Char
 import Util.Aoc2023
 
-test :: SpecWith ()
+test :: Spec
 test = describe "Day 6" $ do
-  it "passes the part 1 example" $
-    readFile "src/Day6/example" >>= parseShouldBe 288 solnA
-  it "passes the part 1 solution" $
-    readFile "src/Day6/input" >>= parseShouldBe 128700 solnA
-  it "passes the part 2 example" $
-    readFile "src/Day6/example" >>= parseShouldBe 71503 solnB
-  it "passes the part 2 solution" $ do
-    readFile "src/Day6/input" >>= parseShouldBe 39594072 solnB
+  example 6 1 1 $ parseShouldBe 288 solnA
+  input 6 1 $ parseShouldBe 128700 solnA
+  example 6 2 1 $ parseShouldBe 71503 solnB
+  input 6 2 $ parseShouldBe 39594072 solnB
 
 solnA :: Parser Int
 solnA = product .: zipWith options <$> line integer <*> line integer

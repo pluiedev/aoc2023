@@ -3,15 +3,28 @@ module Util.Aoc2023 where
 import Data.Void (Void)
 import Test.Hspec
 import Text.Megaparsec
-import Text.Megaparsec.Char
+import qualified Text.Megaparsec.Char.Lexer as L
 
 type Parser = Parsec Void String
 
 integer :: Parser Int
-integer = read <$> some digitChar
+integer = L.signed (return ()) L.decimal
+
+uInteger :: Parser Int
+uInteger = L.lexeme (return ()) L.decimal
 
 surroundedBy :: Applicative m => m a -> m sur -> m a
 surroundedBy i o = o *> i <* o
+
+readInput :: String -> Int -> IO String
+readInput name day = readFile ("src/Day" ++ show day ++ "/" ++ name)
+
+input :: Int -> Int -> (String -> Expectation) -> Spec
+input day part f = it ("passes the part " ++ show part ++ " solution") $ readInput "input" day >>= f
+
+example :: Int -> Int -> Int -> (String -> Expectation) -> Spec
+example day part n f = it ("passes the part " ++ show part ++ " example " ++ show n) $
+  readInput ("example" ++ show n) day >>= f
 
 parseShouldBe :: (Show a, Stream s, Ord e, Eq a) => a -> Parsec e s a -> s -> Expectation
 parseShouldBe v p = (`shouldBe` Just v) . parseMaybe p

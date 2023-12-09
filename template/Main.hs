@@ -1,19 +1,11 @@
 module DayN where
 
-import Test.Hspec
+import Test.Hspec (Spec, describe)
 import Util.Aoc2023
 
-test :: SpecWith ()
+test :: Spec
 test = describe "Day N" $ do
-  it "passes the part 1 example" $ do
-    readFile "src/DayN/example"
-    unimplemented
-  it "passes the part 1 solution" $ do
-    readFile "src/DayN/input"
-    unimplemented
-  it "passes the part 2 example" $ do
-    readFile "src/DayN/example"
-    unimplemented
-  it "passes the part 2 solution" $ do
-    readFile "src/DayN/input"
-    unimplemented
+  example N 1 1 $ const unimplemented
+  input N 1 $ const unimplemented
+  example N 2 1 $ const unimplemented
+  input N 2 $ const unimplemented

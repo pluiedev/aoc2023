@@ -8,6 +8,8 @@ import qualified Day4
 import qualified Day5
 import qualified Day6
 import qualified Day7
+import qualified Day8
+import qualified Day9
 
 main :: IO ()
 main = hspec $ do
@@ -18,3 +20,5 @@ main = hspec $ do
   Day5.test
   Day6.test
   Day7.test
+  Day8.test
+  Day9.test

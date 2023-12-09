@@ -2,23 +2,17 @@ module Day5 where
 
 import Data.Either (partitionEithers)
 import Data.Maybe
-import Test.Hspec
+import Test.Hspec (Spec, describe)
 import Text.Megaparsec.Char
 import Text.Megaparsec
 import Util.Aoc2023
 
-test :: SpecWith ()
+test :: Spec
 test = describe "Day 5" $ do
-  it "passes the part 1 example" $
-    readFile "src/Day5/example" >>= parseShouldBe 35 solnA
-  it "passes the part 1 solution" $
-    readFile "src/Day5/input" >>= parseShouldBe 199602917 solnA
-  it "passes the part 2 example" $
-    -- readFile "src/Day5/example" >>= parseTest solnB
-    pendingWith "performance sucks"
-  it "passes the part 2 solution" $
-    -- readFile "src/Day5/input" >>= parseShouldBe 46 solnB
-    pendingWith "performance sucks"
+  example 5 1 1 $ parseShouldBe 35 solnA
+  input 5 1 $ parseShouldBe 199602917 solnA
+  example 5 2 1 $ const unimplemented
+  input 5 2 $ const unimplemented
 
 solnA :: Parser Int
 solnA = do

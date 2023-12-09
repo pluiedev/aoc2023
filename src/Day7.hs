@@ -4,12 +4,12 @@ import Data.Char (ord)
 import Data.List (sort, partition, group)
 import Data.Maybe (listToMaybe, fromMaybe)
 import Data.Ord
-import Test.Hspec
+import Test.Hspec (Spec, describe, it, shouldBe, shouldSatisfy)
 import Text.Megaparsec
 import Text.Megaparsec.Char
 import Util.Aoc2023
 
-test :: SpecWith ()
+test :: Spec
 test = describe "Day 7" $ do
   let
     checkKinds c = mapM_ (\(s, k) -> handType (c s) `shouldBe` k)
@@ -30,10 +30,9 @@ test = describe "Day 7" $ do
        ("KTJJT", "KK677"),
        ("KK677", "T55J5"),
        ("T55J5", "QQQJA")]
-  it "passes the part 1 example" $
-    readFile "src/Day7/example" >>= parseShouldBe 6440 (soln CardA)
-  it "passes the part 1 solution" $
-    readFile "src/Day7/input" >>= parseShouldBe 252052080 (soln CardA)
+
+  example 7 1 1 $ parseShouldBe 6440 (soln CardA)
+  input 7 1 $ parseShouldBe 252052080 (soln CardA)
 
   it "passes part 2 sanity checks" $ do
     let c = fromList CardB
@@ -47,10 +46,9 @@ test = describe "Day 7" $ do
       [("JKKK2", "QQQQ2"),
        ("T55J5", "QQQJA"),
        ("QQQJA", "KTJJT")]
-  it "passes the part 2 example" $
-    readFile "src/Day7/example" >>= parseShouldBe 5905 (soln CardB)
-  it "passes the part 2 solution" $
-    readFile "src/Day7/input" >>= parseShouldBe 252898370 (soln CardB)
+
+  example 7 2 1 $ parseShouldBe 5905 (soln CardB)
+  input 7 2 $ parseShouldBe 252898370 (soln CardB)
 
 soln :: Card c => (Char -> c) -> Parser Int
 soln c =
