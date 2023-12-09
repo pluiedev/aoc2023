@@ -13,17 +13,17 @@ test = describe "Day 9" $ do
   input 9 2 $ parseShouldBe 966 solnB
 
 solnA :: Parser Int
-solnA = parseInput $ sum . map last
+solnA = parseInput $ (+) . last
 
 -- I just ***RANDOMLY*** guessed a fold based on the end values,
 -- and holy shit it just f'ing works
 -- I love Haskell
 solnB :: Parser Int
-solnB = parseInput $ foldr (-) 0 . map head
+solnB = parseInput $ (-) . head
 
-parseInput :: ([[Int]] -> Int) -> Parser Int
+parseInput :: ([Int] -> Int -> Int) -> Parser Int
 parseInput f =
-  sum . map (f . seqs) . filter (not . null)
+  sum . map (foldr f 0 . seqs) . filter (not . null)
   <$> integer `sepBy` hspace `sepEndBy` newline
 
 seqs :: [Int] -> [[Int]]

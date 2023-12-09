@@ -1,7 +1,7 @@
 module Day7 where
 
 import Data.Char (ord)
-import Data.List (sort, partition, group)
+import Data.List (sort, sortOn, partition, group)
 import Data.Maybe (listToMaybe, fromMaybe)
 import Data.Ord
 import Test.Hspec (Spec, describe, it, shouldBe, shouldSatisfy)
@@ -66,7 +66,7 @@ class (Eq c, Ord c) => Card c where
   lengthOfGroups :: [c] -> [Int]
 
 lengthOfGroups' :: Card c => [c] -> [Int]
-lengthOfGroups' = reverse . sort . map length . group . sort
+lengthOfGroups' = sortOn Down . map length . group . sort
 
 newtype CardA = CardA Char deriving (Show, Eq)
 instance Ord CardA where

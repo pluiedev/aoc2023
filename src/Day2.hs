@@ -44,4 +44,4 @@ cube = flip id
   <*> choice [
     (\n -> Cubes n 0 0) <$ string "red",
     (\n -> Cubes 0 n 0) <$ string "green",
-    (Cubes 0 0) <$ string "blue"]
+    Cubes 0 0 <$ string "blue"]
