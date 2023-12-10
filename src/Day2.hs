@@ -13,12 +13,16 @@ test = describe "Day 2" $ do
   input 2 2 $ parseShouldBe 84538 (soln mapB)
 
 data Game = Game Int Cubes deriving (Show, Eq)
+
 data Cubes = Cubes Int Int Int deriving (Show, Eq)
+
 instance Semigroup Cubes where
-  (Cubes r1 g1 b1) <> (Cubes r2 g2 b2) = Cubes
-    (r1 `max` r2)
-    (g1 `max` g2)
-    (b1 `max` b2)
+  (Cubes r1 g1 b1) <> (Cubes r2 g2 b2) =
+    Cubes
+      (r1 `max` r2)
+      (g1 `max` g2)
+      (b1 `max` b2)
+
 instance Monoid Cubes where
   mempty = Cubes 0 0 0
 
@@ -34,14 +38,18 @@ mapB :: Game -> Int
 mapB (Game _ (Cubes r g b)) = r * g * b
 
 gameA :: Parser Game
-gameA = Game
-  <$> between (string "Game ") (string ": ") integer
-  <*> (mconcat . mconcat <$> cube `sepBy` string ", " `sepBy` string "; ")
+gameA =
+  Game
+    <$> between (string "Game ") (string ": ") integer
+    <*> (mconcat . mconcat <$> cube `sepBy` string ", " `sepBy` string "; ")
 
 cube :: Parser Cubes
-cube = flip id
-  <$> integer <* space
-  <*> choice [
-    (\n -> Cubes n 0 0) <$ string "red",
-    (\n -> Cubes 0 n 0) <$ string "green",
-    Cubes 0 0 <$ string "blue"]
+cube =
+  flip id
+    <$> integer
+    <* space
+    <*> choice
+      [ (\n -> Cubes n 0 0) <$ string "red",
+        (\n -> Cubes 0 n 0) <$ string "green",
+        Cubes 0 0 <$ string "blue"
+      ]

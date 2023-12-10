@@ -24,7 +24,7 @@ solnB = parseInput $ (-) . head
 parseInput :: ([Int] -> Int -> Int) -> Parser Int
 parseInput f =
   sum . map (foldr f 0 . seqs) . filter (not . null)
-  <$> integer `sepBy` hspace `sepEndBy` newline
+    <$> integer `sepBy` hspace `sepEndBy` newline
 
 seqs :: [Int] -> [[Int]]
 seqs xs
@@ -34,4 +34,3 @@ seqs xs
 -- basically makes a sliding window with size 2
 zipAdjacent :: (a -> a -> b) -> [a] -> [b]
 zipAdjacent f = zipWith f <*> tail
-

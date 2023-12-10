@@ -1,15 +1,15 @@
 module Main where
 
+import Day1 qualified
+import Day2 qualified
+import Day3 qualified
+import Day4 qualified
+import Day5 qualified
+import Day6 qualified
+import Day7 qualified
+import Day8 qualified
+import Day9 qualified
 import Test.Hspec
-import qualified Day1
-import qualified Day2
-import qualified Day3
-import qualified Day4
-import qualified Day5
-import qualified Day6
-import qualified Day7
-import qualified Day8
-import qualified Day9
 
 main :: IO ()
 main = hspec $ do

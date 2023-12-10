@@ -20,14 +20,17 @@ solnB :: Parser Int
 solnB = (options `on` read) <$> line digitChar <*> line digitChar
 
 line :: (Token s ~ Char, MonadParsec e s m) => m a -> m [a]
-line p = between
-  (many letterChar *> char ':' *> hspace) newline $
-  many (p <* hspace)
+line p =
+  between
+    (many letterChar *> char ':' *> hspace)
+    newline
+    $ many (p <* hspace)
 
 options :: Int -> Int -> Int
 -- options t d = length [() | h <- [0..t], h * (t - h) > d]
 options t d = ((-) `on` ceiling . flip (/) 2) (t' + c) (t' - c)
-  where -- faster math™ magic
+  where
+    -- faster math™ magic
     t' = fromIntegral t :: Double
     d' = fromIntegral d
     c = sqrt (t' * t' - 4.0 * (d' + 0.01))
