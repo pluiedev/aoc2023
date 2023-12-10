@@ -11,13 +11,11 @@ build-type:    Simple
 common deps
   default-language: GHC2021
   build-depends:
-    , algebraic-graphs
     , base               ^>=4.17.2.1
     , containers
     , hspec
     , megaparsec
     , safe
-    , search-algorithms
     , split
 
   ghc-options:      -Wall
