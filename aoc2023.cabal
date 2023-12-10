@@ -25,8 +25,9 @@ library
   exposed-modules: Util.Aoc2023
   hs-source-dirs:  lib
 
-executable main
+executable aoc2023
   import:         deps
   build-depends:  aoc2023
   hs-source-dirs: src
   main-is:        Main.hs
+  other-modules:  Day1, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9

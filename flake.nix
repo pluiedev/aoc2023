@@ -18,10 +18,14 @@
         treefmt-nix.flakeModule
       ];
       perSystem = {
+        self',
         pkgs,
         config,
         ...
       }: {
+        apps.default = self'.apps.aoc2023;
+        packages.default = self'.packages.aoc2023;
+
         haskellProjects.default.autoWire = ["packages" "apps" "checks"];
         treefmt.config = {
           projectRootFile = "flake.nix";

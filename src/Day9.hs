@@ -1,6 +1,6 @@
 module Day9 where
 
-import Test.Hspec (Spec, describe, it)
+import Test.Hspec (Spec, describe)
 import Text.Megaparsec
 import Text.Megaparsec.Char
 import Util.Aoc2023

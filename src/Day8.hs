@@ -1,10 +1,7 @@
 module Day8 where
 
-import Control.Monad (liftM2)
-import Data.List (elemIndex, findIndex)
 import Data.Map.Strict (Map, (!))
 import qualified Data.Map.Strict as Map
-import Data.Maybe (fromMaybe)
 import Test.Hspec (Spec, describe)
 import Text.Megaparsec
 import Text.Megaparsec.Char
@@ -28,6 +25,7 @@ walk f m = walk' 0
   where
     pickDir DLeft = left
     pickDir DRight = right
+    walk' i [] _ = i
     walk' i (d : ds) cur
       | f cur = i
       | otherwise = walk' (i + 1) ds $ pickDir d $ m ! cur
@@ -57,10 +55,10 @@ parseInput =
     <*> (Map.fromList <$> ((,) <$> nodeKey <*> node) `sepEndBy` newline)
   where
     dir = DLeft <$ char 'L' <|> DRight <$ char 'R'
-    label = some $ digitChar <|> upperChar
-    nodeKey = label <* char '=' `surroundedBy` hspace
+    lbl = some $ digitChar <|> upperChar
+    nodeKey = lbl <* char '=' `surroundedBy` hspace
     node =
       between
         (char '(')
         (char ')')
-        $ Node <$> label <* string ", " <*> label
+        $ Node <$> lbl <* string ", " <*> lbl
