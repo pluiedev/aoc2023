@@ -29,7 +29,7 @@ parseInput f =
 seqs :: [Int] -> [[Int]]
 seqs xs
   | null xs || all (== 0) xs = [xs]
-  | otherwise = xs : seqs (zipAdjacent (flip (-)) xs)
+  | otherwise = xs : seqs (zipAdjacent subtract xs)
 
 -- basically makes a sliding window with size 2
 zipAdjacent :: (a -> a -> b) -> [a] -> [b]

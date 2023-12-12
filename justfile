@@ -2,15 +2,18 @@ alias d := dev
 alias r := run
 alias p := prep
 
-dev:
-  ghcid --target=main -T main --warnings --reload src/ --reload lib/
+devargs := "--target=solns --warnings --reload src/ --reload lib/"
+
+dev day="":
+  ghcid {{devargs}} --test {{ if day == "" { "main" } else { "\"hspec Day" + day + ".test\"" } }}
 
 run:
-  cabal run .#main
+  nix run .#main
 
 prep day: (refresh_input day)
+  mkdir -p src/Day{{day}}
   sed "s/N/{{day}}/" template/Main.hs > src/Day{{day}}.hs
-  touch src/Day{{day}}/example
+  touch src/Day{{day}}/example1
 
 refresh_input day:
   mkdir -p src/Day{{day}}

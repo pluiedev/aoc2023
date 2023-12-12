@@ -2,7 +2,7 @@ module Day4 where
 
 import Control.Monad (liftM2)
 import Data.Function (on)
-import qualified Data.Set as Set
+import Data.Set qualified as Set
 import Test.Hspec (Spec, describe)
 import Text.Megaparsec
 import Text.Megaparsec.Char

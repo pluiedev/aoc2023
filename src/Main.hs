@@ -1,6 +1,8 @@
 module Main where
 
 import Day1 qualified
+import Day10 qualified
+import Day11 qualified
 import Day2 qualified
 import Day3 qualified
 import Day4 qualified
@@ -22,3 +24,5 @@ main = hspec $ do
   Day7.test
   Day8.test
   Day9.test
+  Day10.test
+  Day11.test
