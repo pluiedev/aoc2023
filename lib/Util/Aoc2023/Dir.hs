@@ -10,7 +10,7 @@ class Dir d where
   -- Rotate counterclockwise 90 degrees.
   ccw90 :: d -> d
 
-data Dir4 = North | West | South | East deriving (Show, Eq)
+data Dir4 = North | West | South | East deriving (Show, Eq, Ord)
 
 instance Dir Dir4 where
   opposite North = South
@@ -27,6 +27,9 @@ instance Dir Dir4 where
   ccw90 West = South
   ccw90 South = East
   ccw90 East = North
+
+dir4s :: [Dir4]
+dir4s = [North, West, South, East]
 
 data Dir8
   = DueNorth
@@ -86,3 +89,26 @@ ccw45 DueSouth = SouthEast
 ccw45 SouthEast = DueEast
 ccw45 DueEast = NorthEast
 ccw45 NorthEast = DueNorth
+
+fromDir4 :: Dir4 -> Dir8
+fromDir4 North = DueNorth
+fromDir4 West = DueWest
+fromDir4 South = DueSouth
+fromDir4 East = DueEast
+
+dir8s :: [Dir8]
+dir8s =
+  [ DueNorth
+  , NorthWest
+  , DueWest
+  , SouthWest
+  , DueSouth
+  , SouthEast
+  , DueEast
+  , NorthEast]
+
+cardinals8 :: [Dir8]
+cardinals8 = map fromDir4 dir4s
+
+ordinals8 :: [Dir8]
+ordinals8 = [NorthWest, SouthWest, SouthEast, NorthEast]

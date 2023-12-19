@@ -18,6 +18,8 @@ common deps
     , megaparsec
     , safe
     , split
+    , transformers
+    , vector
 
   ghc-options:      -Wall
 
@@ -40,6 +42,12 @@ executable solns
     Day1
     Day10
     Day11
+    Day13
+    Day14
+    Day15
+    Day16
+    Day18
+    Day19
     Day2
     Day3
     Day4
@@ -49,4 +57,4 @@ executable solns
     Day8
     Day9
 
-  ghc-options:    -O2 -threaded -fprof-auto "-with-rtsopts=-N -s"
+  ghc-options:    -O2 -threaded -fprof-auto "-with-rtsopts=-N -p -s"

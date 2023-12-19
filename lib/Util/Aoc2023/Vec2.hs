@@ -2,6 +2,7 @@ module Util.Aoc2023.Vec2 where
 
 import Data.Array.IArray (Ix, inRange, index, range, rangeSize)
 import Data.Ord (comparing)
+import Util.Aoc2023.Dir (Dir4 (..), Dir8(..))
 
 data Vec2 n = Vec2 {x :: n, y :: n} deriving (Show, Eq, Functor)
 
@@ -36,6 +37,9 @@ instance (Monoid n) => Monoid (Vec2 n) where
 mag :: (Real n, Floating f) => Vec2 n -> f
 mag = dist $ Vec2 0 0
 
+scale :: (Num n) => n -> Vec2 n -> Vec2 n
+scale n = fmap (* n)
+
 -- Euclidean distance between two points
 dist :: (Real n, Floating f) => Vec2 n -> Vec2 n -> f
 dist (Vec2 x1 y1) (Vec2 x2 y2) = sqrt (x' * x' + y' * y')
@@ -45,3 +49,19 @@ dist (Vec2 x1 y1) (Vec2 x2 y2) = sqrt (x' * x' + y' * y')
 
 taxicabDist :: (Num n) => Vec2 n -> Vec2 n -> n
 taxicabDist (Vec2 x1 y1) (Vec2 x2 y2) = abs (x1 - x2) + abs (y1 - y2)
+
+moveTo :: (Num n) => Dir4 -> Vec2 n -> Vec2 n
+moveTo North = (+ Vec2 0 (-1))
+moveTo East = (+ Vec2 1 0)
+moveTo South = (+ Vec2 0 1)
+moveTo West = (+ Vec2 (-1) 0)
+
+moveTo8 :: (Num n) => Dir8 -> Vec2 n -> Vec2 n
+moveTo8 DueNorth = (+ Vec2 0 (-1))
+moveTo8 NorthEast = (+ Vec2 1 (-1))
+moveTo8 DueEast = (+ Vec2 1 0)
+moveTo8 SouthEast = (+ Vec2 1 1)
+moveTo8 DueSouth = (+ Vec2 0 1)
+moveTo8 SouthWest = (+ Vec2 (-1) 1)
+moveTo8 DueWest = (+ Vec2 (-1) 0)
+moveTo8 NorthWest = (+ Vec2 (-1) (-1))

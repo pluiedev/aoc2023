@@ -12,7 +12,7 @@ import Text.Megaparsec hiding (Pos)
 import Text.Megaparsec.Char
 import Util.Aoc2023
 import Util.Aoc2023.Array
-import Util.Aoc2023.Dir (Dir4 (..), opposite)
+import Util.Aoc2023.Dir (Dir4 (..), opposite, dir4s)
 import Util.Aoc2023.Vec2
 
 test :: Spec
@@ -106,9 +106,7 @@ step m s = mapMaybe mapper $ neighbors s
           | otherwise = Nothing
 
 neighbors :: Pos -> [(Dir4, Pos)]
-neighbors s = map (second (+ s)) offsets
-  where
-    offsets = [(East, Vec2 1 0), (South, Vec2 0 1), (West, Vec2 (-1) 0), (North, Vec2 0 (-1))]
+neighbors p = map (\d -> (d, moveTo d p)) dir4s
 
 parseTile :: Parser Tile
 parseTile =

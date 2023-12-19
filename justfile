@@ -12,7 +12,12 @@ run:
 
 prep day: (refresh_input day)
   mkdir -p src/Day{{day}}
-  sed "s/N/{{day}}/" template/Main.hs > src/Day{{day}}.hs
+
+  if [ -e src/Day{{day}}.hs ]; then \
+    echo "WARNING: Day{{day}}.hs already exists! Not overriding..." 1>&2; \
+  else \
+    sed "s/N/{{day}}/" template/Main.hs > src/Day{{day}}.hs; \
+  fi
   touch src/Day{{day}}/example1
 
 refresh_input day:
